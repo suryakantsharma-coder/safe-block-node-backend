@@ -1,5 +1,6 @@
 const createUserSchema = {
     id : '',
+    username : '',
     name : '',
     url : '',
     walletAddress : '',

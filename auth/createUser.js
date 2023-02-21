@@ -5,11 +5,12 @@ const app = router.Router();
 
 // For Creating User Result
 
-async function createUsers(id, name, url, email, phoneNo, walletAddress) {
+async function createUsers(id, name, username, url, email, phoneNo, walletAddress) {
   const schema = Object.assign({}, createUserSchema);
 
   schema.id = id;
   schema.url = url;
+  schema.username = username;
   schema.name = name;
   schema.email = email;
   schema.phoneNo = phoneNo;
@@ -33,6 +34,7 @@ app.get("/", (req, res) => {
     const res = createUsers(
       getUserId(),
       data.name,
+      data.username,
       data.url,
       data.email,
       data.phoneNo,
