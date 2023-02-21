@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended : false}));
 
 // app.use("/otp", require("./OTP/mail"));
-// app.use("/create",  require("./auth/createUser"));
+app.use("/create",  require("./auth/createUser"));
 app.use("/tx",  require('./alchemy/transactions'));
 app.use("/nft",  require("./alchemy/nft"));
 app.use("/token",  require("./alchemy/token"));
