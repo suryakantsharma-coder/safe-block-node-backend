@@ -1,4 +1,5 @@
 const router = require("express");
+const AccountModal = require("../model/SignUPModal");
 const { createUser, getUser } = require("./curd");
 const { createUserSchema } = require("./schema");
 const app = router.Router();
@@ -6,18 +7,25 @@ const app = router.Router();
 // For Creating User Result
 
 async function createUsers(id, name, username, url, email, phoneNo, walletAddress) {
-  const schema = Object.assign({}, createUserSchema);
+  const schema = new AccountModal();
 
-  schema.id = id;
-  schema.url = url;
-  schema.username = username;
+  schema.avtar = url;
+  schema.userName = username;
   schema.name = name;
   schema.email = email;
-  schema.phoneNo = phoneNo;
+  schema.createdAt = new Date().getTime();
+  schema.phoneNumber = phoneNo;
   schema.walletAddress = walletAddress;
 
-  const res = await createUser(schema);
-  return res;
+  // const res = await createUser(schema);
+  schema.save((err, data) => {
+    if (data) {
+      console.log(data)
+      return data;
+    } else {
+      console.log(err)
+    }
+  });
 }
 
 // create an id
@@ -27,7 +35,7 @@ const getUserId = () => {
 };
 
 // create users
-app.get("/", (req, res) => {
+app.post("/", (req, res) => {
   try {
     console.log(req.body);
     const data = req.body;
@@ -54,8 +62,11 @@ app.get("/userInfo", async (req, res) => {
   try {
     const email = req.headers['email']
     const data = await getUser(email);
-    console.log(data)
-    res.send(data);
+    if (data) {
+      res.send(data);
+    } else {
+      res.send("Not Found")
+    }
   } catch (err) {
     res.send(err);
   }

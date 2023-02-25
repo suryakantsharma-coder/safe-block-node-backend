@@ -1,15 +1,30 @@
 const bodyParser = require("body-parser");
 const express = require("express");
+const mongoose = require("mongoose");
 
 const app = express();
 const port = 4000;
+
+const URL = "mongodb+srv://Surya-kant:Suraj1107@cluster0.9fgol9r.mongodb.net/?retryWrites=true&w=majority"
+
+async function connectWithDB () {
+  try {
+    const client = await mongoose.connect(URL);
+    console.log("connect")
+  }catch (err) {
+    console.log(err)
+  }
+}
+
+connectWithDB()
+
 
 app.get("/", (req, res) => {
   console.log(req?.header);
   res.send("Welcome to safe-block");
 });
 
-app.use(bodyParser.json());
+app.use(bodyParser.json()); 
 app.use(bodyParser.urlencoded({extended : false}));
 
 // app.use("/otp", require("./OTP/mail"));

@@ -1,4 +1,5 @@
 const db = require("../firebase");
+const AccountModal = require("../model/SignUPModal");
 
 const createUser = async (data) => {
   const res = await db.collection("users").doc(data.email).set(data);
@@ -6,14 +7,8 @@ const createUser = async (data) => {
 };
 
 const getUser = async (email) => {
-  const cityRef = db.collection("users").doc(email);
-  const doc = await cityRef.get();
-  if (!doc.exists) {
-    console.log("No such document!");
-  } else {
-    console.log("Document data:", doc.data());
-    return doc.data();
-  }
+  const data = await AccountModal.findOne({ email: email }).exec();
+  return data
 };
 
 module.exports = { createUser, getUser };
