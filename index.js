@@ -21,7 +21,7 @@ connectWithDB()
 
 app.get("/", (req, res) => {
   console.log(req?.header);
-  res.send("Welcome to safe-block");
+  res.send("Welcome to SAFE-BLOCK");
 });
 
 app.use(bodyParser.json()); 
