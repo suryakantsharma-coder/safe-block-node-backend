@@ -1,7 +1,7 @@
 const router = require("express");
 const AccountModal = require("../model/SignUPModal");
-const { createUser, getUser } = require("./curd");
-const { createUserSchema } = require("./schema");
+const { getUser } = require("./curd");
+// const { createUserSchema } = require("./schema");
 const app = router.Router();
 
 // For Creating User Result
@@ -35,7 +35,7 @@ const getUserId = () => {
 };
 
 // create users
-app.post("/", (req, res) => {
+app.post("/create", (req, res) => {
   try {
     console.log(req.body);
     const data = req.body;

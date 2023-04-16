@@ -1,8 +1,8 @@
-const db = require("../firebase");
 const AccountModal = require("../model/SignUPModal");
 
 const createUser = async (data) => {
-  const res = await db.collection("users").doc(data.email).set(data);
+  // const res = await db.collection("users").doc(data.email).set(data);
+  const res = new AccountModal(data).save();
   return res;
 };
 
