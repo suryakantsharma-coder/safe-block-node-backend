@@ -62,12 +62,8 @@ app.get("/userInfo", async (req, res) => {
   try {
     const email = req.headers['email']
     const data = await getUser(email);
+    console.log('userinfo', data)
     res.send(data);
-    if (data?.email === email) {
-      res.send(data);
-    } else {
-      res.send({error : 400, msg : 'Not Fount'})
-    }
   } catch (err) {
     res.send(err);
   }
