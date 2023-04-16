@@ -19,6 +19,7 @@ app.use(cors(corsOptions));
 async function connectWithDB () {
   try {
     const client = await mongoose.connect(URL);
+    client.set('strictQuery', true);
     console.log("connect")
   }catch (err) {
     console.log(err)
