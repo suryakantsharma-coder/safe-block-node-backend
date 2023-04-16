@@ -58,19 +58,16 @@ app.post("/create", (req, res) => {
 
 // Get User By Email
 
-app.get("/userInfo", (req, res) => {
+app.get("/userInfo", async (req, res) => {
   try {
     const email = req.headers['email']
-    getUser(email).then((data) => {
-      if (data?.email === email) {
-        res.send(data);
-      } else {
-        res.send({ error: 400, msg: 'Not Fount' })
-      }
-    }).catch((err) => {
-      res.send({ error: 400, msg: err.message })
-    });
-
+    const data = await getUser(email);
+    res.send(data);
+    if (data?.email === email) {
+      res.send(data);
+    } else {
+      res.send({error : 400, msg : 'Not Fount'})
+    }
   } catch (err) {
     res.send(err);
   }
