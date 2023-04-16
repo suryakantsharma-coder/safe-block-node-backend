@@ -13,7 +13,7 @@ const app = express();
 const port = 4000;
 
 // const URL = "mongodb+srv://Surya-kant:Suraj1107@cluster0.9fgol9r.mongodb.net/?retryWrites=true&w=majority"
-const URL = "mongodb+srv://surya-kant:Suraj@cluster0.iik3fru.mongodb.net/?retryWrites=true&w=majority"
+const URL = "mongodb+srv://server:server123@cluster0.iik3fru.mongodb.net/?retryWrites=true&w=majority"
 
 app.use(cors(corsOptions));
 async function connectWithDB () {
