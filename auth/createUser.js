@@ -58,12 +58,16 @@ app.post("/create", (req, res) => {
 
 // Get User By Email
 
-app.get("/userInfo", async (req, res) => {
+app.get("/userInfo", (req, res) => {
   try {
     const email = req.headers['email']
-    const data = await getUser(email);
-    console.log('userinfo', data)
-    res.send(data);
+    getUser(email).then((data) => {
+      console.log('userinfo', data)
+      res.send(data);
+    }).catch(err => {
+      console.log('error', err);
+      res.send(err)
+    });
   } catch (err) {
     res.send(err);
   }
